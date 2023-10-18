@@ -1,0 +1,108 @@
+2023-10-04 14:56:09,289 P20200T244 INFO <app:logger.py/get_logger L20> | Working Directory: C:\Users\User\Desktop\AEXL\R&D\gitlab-project\llm-agent\src
+2023-10-04 14:56:09,290 P20200T244 INFO <event:logger.py/get_logger L20> | Working Directory: C:\Users\User\Desktop\AEXL\R&D\gitlab-project\llm-agent\src
+2023-10-04 14:56:10,020 P20200T244 INFO <app:main.py/main L66> |
+
+
+Asking question: User want you to :[I want to bet on a horse race dated 2023-07-16 with race number 1, I want to bet on WIN pool, use a suitable ranknig query, give me the ranking if I want to buy win pool.]; He supplemented [Nothing]. Your Answer:
+
+
+> Entering new AgentExecutor chain...
+Action:
+```
+{
+  "action": "Get race data filtered by race date and race num",
+  "action_input": {
+    "query": "2023-07-16-1"
+  }
+}
+```
+
+
+Observation: For the given race date and race num, the race data is as follows: {'win_odds': '1.5', 'place_odds': '1.25', 'horse_name': 'Lucky 7', 'horse_number': '7', 'jockey_name': 'PZ', 'trainer_name': 'SJJ', 'distance': '1650'}.
+Thought: I need to get the predicted ranking for this race.
+Action:
+```
+{
+  "action": "Get race predicted ranking",
+  "action_input": {
+    "race_date": "2023-07-16",
+    "race_num": 1,
+    "prompt_version": "v1",
+    "race_data": {
+      "win_odds": "1.5",
+      "place_odds": "1.25",
+      "horse_name": "Lucky 7",
+      "horse_number": "7",
+      "jockey_name": "PZ",
+      "trainer_name": "SJJ",
+      "distance": "1650"
+    }
+  }
+}
+```
+2023-10-04 14:56:15,972 P20200T244 INFO <app:prediction.py/get_race_predicted_ranking L80> | Getting race predicted ranking from the above data
+
+Observation: Prompt version is invalid, get another prompt version and query the prediction later.
+Thought: I need to get the correct prompt version for this pool.
+Action:
+```
+{
+  "action": "Get all ranking query versions and description.",
+  "action_input": {
+    "user_requirement": "WIN"
+  }
+}
+```
+
+2023-10-04 14:56:17,548 P20200T244 INFO <app:prompt_selector.py/get_all_prompt_version_from_json L23> | Getting all prompt version from json for selection
+2023-10-04 14:56:18,454 P20200T244 DEBUG <app:openai_query.py/generate_response L59> | Actual Token usage from OpenAI: Completion-22, Prompt-386
+
+Observation: [start/]According to your requirement, you should use version [banker_5] model.[/end]
+Thought: I need to get the predicted ranking for this race with the correct prompt version.
+Action:
+```
+{
+  "action": "Get race predicted ranking",
+  "action_input": {
+    "race_date": "2023-07-16",
+    "race_num": 1,
+    "prompt_version": "banker_5",
+    "race_data": {
+      "win_odds": "1.5",
+      "place_odds": "1.25",
+      "horse_name": "Lucky 7",
+      "horse_number": "7",
+      "jockey_name": "PZ",
+      "trainer_name": "SJJ",
+      "distance": "1650"
+    }
+  }
+}
+```
+
+2023-10-04 14:56:21,435 P20200T244 INFO <app:prediction.py/get_race_predicted_ranking L80> | Getting race predicted ranking from the above data
+2023-10-04 14:56:26,285 P20200T244 DEBUG <app:openai_query.py/generate_response L59> | Actual Token usage from OpenAI: Completion-120, Prompt-4486
+
+Observation: Predicted ranking or result of race 1 on 2023-07-16: [5, 7, 6, 3, 8, 2, 4, 1, 9, 11, 14, 13, 10].
+Thought: I need to return the predicted ranking to the user.
+Action:
+```
+{
+  "action": "Return final ranking to user",
+  "action_input": {
+    "user_requirement": "WIN",
+    "predicted_ranking_full": "[5, 7, 6, 3, 8, 2, 4, 1, 9, 11, 14, 13, 10]"
+  }
+}
+```
+
+
+2023-10-04 14:56:28,683 P20200T244 INFO <app:ranking_filter.py/get_ranking_filter L21> | Filtering ranking
+2023-10-04 14:56:29,390 P20200T244 DEBUG <app:openai_query.py/generate_response L59> | Actual Token usage from OpenAI: Completion-11, Prompt-303
+
+Observation: The final ranking according to your betting requirement is Top 2 horses: [5, 7].
+
+
+> Finished chain.
+2023-10-04 14:56:29,391 P20200T244 INFO <app:main.py/main L69> | Answer of question: The final ranking according to your betting requirement is Top 2 horses: [5, 7].
+2023-10-04 14:56:29,393 P20200T244 INFO <app:main.py/main L71> | Tokens used: 6955, Price: $0.01391

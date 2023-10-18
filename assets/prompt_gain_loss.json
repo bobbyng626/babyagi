@@ -1,0 +1,22 @@
+[
+  {
+      "version": "banker_5",
+      "description": "This is a version to get first TWO ranking of a horse race, with good performance in 'WIN' and 'QUINELLA' pool. It gains 3.4K dollor from this version."
+  },
+  {
+      "version": "banker_10",
+      "description": "This is a version to get first TWO ranking of a horse race, with very good performance especially in 'WIN' pool, good performance in 'QUINELLA' pool. It gains 5K dollor from this version."
+  },
+  {
+      "version": "leg_9",
+      "description": "This is a version to get first FOUR ranking of a horse race, with good performance in 'TIERCE_b2_single' and 'TIERCE_b2_multiple' and 'Quartet_b1_single' and 'Quartet_b2_single' and 'Quartet_b2_multiple' pool. It gains 261.9K dollor from this version."
+  },
+  {
+      "version": "leg_10",
+      "description": "This is a version to get first FOUR ranking of a horse race, with good performance in 'TIERCE_b1_single' and 'Quartet_b1_single' and 'Quartet_b1_multiple' and 'Quartet_b2_multiple' pool. It gains 265.2K dollor from this version."
+  },
+  {
+      "version": "leg_11",
+      "description": "This is a version to get first FOUR ranking of a horse race, with good performance in 'TIERCE_b1_single' and 'TIERCE_b1_multiple' pool. It gains 2.6K dollor from this version."
+  }
+]

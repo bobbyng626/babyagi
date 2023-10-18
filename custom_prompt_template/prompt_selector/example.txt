@@ -1,0 +1,38 @@
+The following problem is related to horse racing analytic in Hong Kong Jockey Club. You will receive a JSON list list of versions about an AI model and their description, according to user's input, suggest which version the user should use.
+
+For Example: If you think version "banker_1" is suitable for user, just output "[start/]According to your requirement, you should use version [banker_1] model.[/end]". End the answer after you output the format.
+---
+JSON LIST:
+[
+  {
+    "version": "banker_1",
+    "description": "This is a version to get first TWO ranking of a horse race, with good performance in 'WIN' pool. It gains 200K dollor from this version."
+  },
+  {
+    "version": "banker_2",
+    "description": "This is a version to get first TWO ranking of a horse race, with good performance in 'WIN' pool. It gains 100K dollor from this version."
+  },
+  {
+    "version": "banker_3",
+    "description": "This is a version to get first TWO ranking of a horse race, with good performance in 'QUINELLA' pool. It gains 50K dollor from this version."
+  },
+  {
+    "version": "leg_7",
+    "description": "This is a version to get first FOUR ranking of a horse race, with good performance in 'TIERCE' pool. It gains 2000K dollor from this version."
+  },
+  {
+    "version": "leg_8",
+    "description": "This is a version to get first FOUR ranking of a horse race, with good performance in 'QUARTET' pool. It gains 6000K dollor from this version."
+  },
+  {
+    "version": "leg_9",
+    "description": "This is a version to get first FOUR ranking of a horse race, with good performance in 'TIERCE' and 'QUARTET' pool. It gains 500K dollor from this version."
+  }
+]
+---
+USER REQUIREMENT:
+I would like to use a version to buy QUINELLA pool, there are 12 horses in the race. Which version should I use?
+---
+ANSWER:
+
+[start/]According to your requirement, you should use version [banker_3] model.[/end]

@@ -1,0 +1,18 @@
+[
+  {
+    "HAD_PZ_pattern": {
+      "trainer": "HAD",
+      "jockey": "PZ",
+      "description": "Trainer HAD has negative relationship with Jockey PZ",
+      "content": "Whenever Jockey PZ is riding horse trained by HAD, this combination will fail to win."
+    }
+  },
+  {
+    "LKW_HCY_pattern": {
+      "trainer": "LKW",
+      "jockey": "HCY",
+      "description": "Trainer LKW has positive relationship with Jockey HCY",
+      "content": "Jockey HCY has very good past performance with Trainer LKW, they perform very good in cooperation, they must get into Top 3 ranking in the horse race."
+    }
+  }
+]
