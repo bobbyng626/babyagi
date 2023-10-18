@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 from dotenv import load_dotenv
-
+from settings import SETTINGS
 # Load default environment variables (.env)
 load_dotenv()
+# API Keys
+# OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+OPENAI_API_KEY = SETTINGS.AZURE.OPENAI_API_KEY
 
 import os
 import time
@@ -27,8 +30,6 @@ client = chromadb.Client(Settings(anonymized_telemetry=False))
 # Model: GPT, LLAMA, HUMAN, etc.
 LLM_MODEL = os.getenv("LLM_MODEL", os.getenv("OPENAI_API_MODEL", "gpt-3.5-turbo")).lower()
 
-# API Keys
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 if not (LLM_MODEL.startswith("llama") or LLM_MODEL.startswith("human")):
     assert OPENAI_API_KEY, "\033[91m\033[1m" + "OPENAI_API_KEY environment variable is missing from .env" + "\033[0m\033[0m"
 
@@ -169,8 +170,10 @@ else:
     print("\033[93m\033[1m" + f"\nJoining to help the objective" + "\033[0m\033[0m")
 
 # Configure OpenAI
-openai.api_key = OPENAI_API_KEY
-
+openai.api_key = SETTINGS.AZURE.OPENAI_API_KEY
+openai.api_type = "azure"
+openai.api_version = "2023-09-15-preview"
+openai.api_base = SETTINGS.AZURE.OPENAI_ENDPOINT
 
 # Llama embedding function
 class LlamaEmbeddingFunction(EmbeddingFunction):
@@ -354,15 +357,21 @@ def openai_call(
             elif model.lower().startswith("human"):
                 return user_input_await(prompt)
             elif not model.lower().startswith("gpt-"):
+                messages = [{
+                    "role": "user",
+                    "content": prompt
+                }]
+                print(openai.api_key)
                 # Use completion API
-                response = openai.Completion.create(
+                response = openai.ChatCompletion.create(
                     engine=model,
-                    prompt=prompt,
+                    messages=messages,
                     temperature=temperature,
                     max_tokens=max_tokens,
                     top_p=1,
                     frequency_penalty=0,
                     presence_penalty=0,
+                    stop=None,
                 )
                 return response.choices[0].text.strip()
             else:
@@ -371,10 +380,15 @@ def openai_call(
 
                 trimmed_prompt = limit_tokens_from_string(prompt, model, 4000 - max_tokens)
 
+                # Configure OpenAI
+                openai.api_key = SETTINGS.AZURE.OPENAI_API_KEY
+                openai.api_type = "azure"
+                openai.api_version = "2023-09-15-preview"
+                openai.api_base = SETTINGS.AZURE.OPENAI_ENDPOINT
                 # Use chat completion API
                 messages = [{"role": "system", "content": trimmed_prompt}]
                 response = openai.ChatCompletion.create(
-                    model=model,
+                    engine="Test-gpt-35-model",
                     messages=messages,
                     temperature=temperature,
                     max_tokens=max_tokens,

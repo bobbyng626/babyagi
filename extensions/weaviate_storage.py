@@ -6,7 +6,7 @@ from typing import Dict, List
 import openai
 import weaviate
 from weaviate.embedded import EmbeddedOptions
-
+from settings import SETTINGS
 
 def can_import(module_name):
     try:
@@ -58,7 +58,10 @@ class WeaviateResultsStorage:
         results_store_name: str,
         objective: str,
     ):
-        openai.api_key = openai_api_key
+        openai.api_key = SETTINGS.AZURE.OPENAI_API_KEY
+        openai.api_type = "azure"
+        openai.api_version = "2023-09-15-preview"
+        openai.api_base = SETTINGS.AZURE.OPENAI_ENDPOINT
         self.client = create_client(
             weaviate_url, weaviate_api_key, weaviate_use_embedded
         )

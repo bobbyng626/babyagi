@@ -6,6 +6,7 @@ import openai
 import pinecone
 from dotenv import load_dotenv
 import textwrap
+from settings import SETTINGS
 
 load_dotenv()
 
@@ -66,7 +67,10 @@ def draw_summary(stdscr, objective, tasks, start, num):
 
 def main(stdscr):
     # Configure OpenAI
-    openai.api_key = OPENAI_API_KEY
+    openai.api_key = SETTINGS.AZURE.OPENAI_API_KEY
+    openai.api_type = "azure"
+    openai.api_version = "2023-09-15-preview"
+    openai.api_base = SETTINGS.AZURE.OPENAI_ENDPOINT
 
     # Initialize Pinecone
     pinecone.init(api_key=PINECONE_API_KEY)

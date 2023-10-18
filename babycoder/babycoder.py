@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import json
 import subprocess
 import platform
-
+from settings import SETTINGS
 from embeddings import Embeddings
 
 # Set Variables
@@ -21,9 +21,12 @@ max_openai_calls_retries = 3
 # Set API Keys
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 assert OPENAI_API_KEY, "OPENAI_API_KEY environment variable is missing from .env"
-openai.api_key = OPENAI_API_KEY
+openai.api_key = SETTINGS.AZURE.OPENAI_API_KEY
+openai.api_type = "azure"
+openai.api_version = "2023-09-15-preview"
+openai.api_base = SETTINGS.AZURE.OPENAI_ENDPOINT
 
-OPENAI_API_MODEL = os.getenv("OPENAI_API_MODEL", "gpt-3.5-turbo")
+OPENAI_API_MODEL = os.getenv("OPENAI_API_MODEL", "Test-gpt-35-model")
 assert OPENAI_API_MODEL, "OPENAI_API_MODEL environment variable is missing from .env"
 
 if "gpt-4" in OPENAI_API_MODEL.lower():

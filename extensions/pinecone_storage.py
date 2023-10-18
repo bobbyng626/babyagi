@@ -3,6 +3,7 @@ import importlib
 import openai
 import pinecone
 import re
+from settings import SETTINGS
 
 def can_import(module_name):
     try:
@@ -17,7 +18,10 @@ assert (
 
 class PineconeResultsStorage:
     def __init__(self, openai_api_key: str, pinecone_api_key: str, pinecone_environment: str, llm_model: str, llama_model_path: str, results_store_name: str, objective: str):
-        openai.api_key = openai_api_key
+        openai.api_key = SETTINGS.AZURE.OPENAI_API_KEY
+        openai.api_type = "azure"
+        openai.api_version = "2023-09-15-preview"
+        openai.api_base = SETTINGS.AZURE.OPENAI_ENDPOINT
         pinecone.init(api_key=pinecone_api_key, environment=pinecone_environment)
 
         # Pinecone namespaces are only compatible with ascii characters (used in query and upsert)
