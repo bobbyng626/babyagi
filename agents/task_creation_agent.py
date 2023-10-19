@@ -27,7 +27,8 @@ class TaskCreationAgent:
   The number of each entry must be followed by a period. If your list is empty, write "There are no tasks to add at this time."
   Unless your list is empty, do not include any headers before your numbered list or follow your numbered list with any other output."""
 
-      print(f'\n*****TASK CREATION AGENT PROMPT****\n{prompt}\n')
+    #   print(f'\n*****TASK CREATION AGENT PROMPT****\n{prompt}\n')
+      print(f'\n*****TASK CREATION AGENT PROMPT****\n\n')
       response = OpenAIQuery.generate_response(prompt=prompt, max_completion_token=2000)
       print(f'\n****TASK CREATION AGENT RESPONSE****\n{response}\n')
       new_tasks = response.split('\n')

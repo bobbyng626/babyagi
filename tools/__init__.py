@@ -9,7 +9,9 @@ from .ranking_actual import RankingActualTool
 from .race_date import RaceDateTool
 from .race_number import RaceNumberTool
 from .general import GeneralTool
-from .analyze_insight import AnalyzeInsightInput
+from .analyze_insight import AnalyzeInsightTool
+from .task_list import TaskListTool
+from .results_checking import ResultsCheckingTool
 
 tools = [
     PromptSelectorTool(),
@@ -21,5 +23,7 @@ tools = [
     RaceDateTool(),
     RaceNumberTool(),
     GeneralTool(),
-    # AnalyzeInsightInput()
+    # TaskListTool(),
+    ResultsCheckingTool(),
+    # AnalyzeInsightTool()
 ]

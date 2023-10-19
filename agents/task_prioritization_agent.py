@@ -20,7 +20,8 @@ class TaskPrioritizationAgent:
     The entries must be consecutively numbered, starting with 1. The number of each entry must be followed by a period.
     Do not include any headers before your ranked list or follow your list with any other output."""
 
-        print(f'\n****TASK PRIORITIZATION AGENT PROMPT****\n{prompt}\n')
+        # print(f'\n****TASK PRIORITIZATION AGENT PROMPT****\n{prompt}\n')
+        print(f'\n****TASK PRIORITIZATION AGENT PROMPT****\n\n')
         response = OpenAIQuery.generate_response(prompt=prompt, max_completion_token=2000)
         # response = openai_call(prompt, max_tokens=2000)
         print(f'\n****TASK PRIORITIZATION AGENT RESPONSE****\n{response}\n')

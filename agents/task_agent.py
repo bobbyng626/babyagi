@@ -5,6 +5,7 @@ from langchain.prompts import MessagesPlaceholder
 from langchain.memory import ConversationBufferMemory
 from langchain.agents import initialize_agent
 from langchain.agents import AgentType, AgentExecutor
+from aexlutils import logger
 class TaskAgent:
   @classmethod
   def task_agent(cls):
@@ -22,7 +23,7 @@ class TaskAgent:
     with open("worker_agent_system_message.txt", "r") as f:
         text = f.read()
     system_message = (text)
-
+    logger.info(system_message)
     agent = initialize_agent(
         tools,
         llm,
